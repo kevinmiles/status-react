@@ -57,16 +57,14 @@
                               (i18n/label :t/wrong-password)
                               (:message error)))
           (reset! in-progress? false))
-      ;; RESULT
       (do
         (re-frame/dispatch [:wallet/add-unconfirmed-transaction transaction result])
         (if on-result
           (re-frame/dispatch (conj on-result id result method))
-          (when public-key
-            (re-frame/dispatch [:send-transaction-message public-key flow {:address to
-                                                                           :asset   (name symbol)
-                                                                           :amount  amount-text
-                                                                           :tx-hash result}])))))))
+          (re-frame/dispatch [:send-transaction-message public-key flow {:address to
+                                                                         :asset   (name symbol)
+                                                                         :amount  amount-text
+                                                                         :tx-hash result}]))))))
 
 (defn send-transaction-wrapper [{:keys [transaction password flow all-tokens in-progress? chain contact account]}]
   (let [symbol (:symbol transaction)
@@ -249,7 +247,7 @@
    ;; for the recipient, we always redirect to `:wallet-transaction-sent` even when we don't
    (let [send-command? (and chat-id (get-in db [:id->command ["send" #{:personal-chats}]]))]
      (fx/merge cofx
-               #(when send-command?
+               #(when (and chat-id send-command?)
                   (commands-sending/send % chat-id send-command? params))
                (navigation/navigate-to-clean :wallet-transaction-sent {:flow    flow
                                                                        :chat-id chat-id})))))
