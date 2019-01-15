@@ -115,8 +115,8 @@
                  (i18n/label :t/no-more-participants-available))]])
 
 (views/defview bottom-container [{:keys [on-press disabled label]}]
-  [react/view styles/bottom-container
-   [react/view components.styles/flex]
+  [react/view {:style styles/bottom-container}
+   [react/view {:style components.styles/flex}]
    [components.common/bottom-button
     {:forward?            true
      :accessibility-label :next-button

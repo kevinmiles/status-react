@@ -34,6 +34,7 @@
   {:flex-direction    :row
    :position          :absolute
    :bottom            0
+   :background        colors/white
    :margin-horizontal 12
    :margin-vertical   15})
 
