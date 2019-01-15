@@ -257,7 +257,7 @@
 
 (fx/defn set-name [{:keys [db] :as cofx} installation-name]
   (let [new-account (assoc (get-in cofx [:db :account/account]) :installation-name installation-name)]
-    {:db (assoc-in db [:account/account :installation-name] installation-name)
+    {:db (assoc db :account/account new-account)
      :data-store/base-tx [(data-store.accounts/save-account-tx new-account)]}))
 
 (fx/defn load-installations [{:keys [db all-installations]}]
