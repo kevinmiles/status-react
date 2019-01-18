@@ -182,8 +182,8 @@
       [confirm-modal signing? params]
       [sign-modal account params])))
 
-(defn transaction-overview [{:keys [flow transaction contact token native-currency
-                                    fiat-currency prices all-tokens chain]}]
+(defn render-transaction-overview [{:keys [flow transaction contact token native-currency
+                                           fiat-currency prices all-tokens chain]}]
   (let [tx-atom                (reagent/atom transaction)
         network-fees-modal-ref (atom nil)
         open-network-fees!     #(common/anim-ref-send @network-fees-modal-ref :open!)

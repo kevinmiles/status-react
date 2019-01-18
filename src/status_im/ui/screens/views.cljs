@@ -228,7 +228,7 @@
                                                     :recipient-qr-code       recipient-qr-code
                                                     :wallet-choose-amount    send.views/choose-amount-token
                                                     :wallet-choose-asset     send.views.amount/choose-asset
-                                                    :wallet-txn-overview     send.views/txn-overview
+                                                    :wallet-txn-overview     send.views/transaction-overview
                                                     :wallet-send-assets      wallet.components/send-assets}
                                           :config  {:headerMode "none"}}
 

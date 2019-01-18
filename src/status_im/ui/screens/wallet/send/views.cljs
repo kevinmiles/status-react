@@ -14,17 +14,17 @@
             network       [:account/network]
             all-tokens    [:wallet/all-tokens]
             fiat-currency [:wallet/currency]]
-    [amount/choose-amount-token-helper {:balance         balance
-                                        :network         network
-                                        :all-tokens      all-tokens
-                                        :modal?          modal?
-                                        :prices          prices
-                                        :native-currency native-currency
-                                        :fiat-currency   fiat-currency
-                                        :contact         contact
-                                        :transaction     transaction}]))
+    [amount/render-choose-amount {:balance               balance
+                                  :network         network
+                                  :all-tokens      all-tokens
+                                  :modal?          modal?
+                                  :prices          prices
+                                  :native-currency native-currency
+                                  :fiat-currency   fiat-currency
+                                  :contact         contact
+                                  :transaction     transaction}]))
 
-(defview txn-overview []
+(defview transaction-overview []
   (letsubs [{:keys [transaction flow contact]} [:get-screen-params :wallet-txn-overview]
             prices                             [:prices]
             network                            [:account/network]
@@ -34,21 +34,21 @@
           native-currency (tokens/native-currency chain)
           token           (tokens/asset-for all-tokens
                                             (ethereum/network->chain-keyword network) (:symbol transaction))]
-      [overview/transaction-overview {:transaction     transaction
-                                      :flow            flow
-                                      :contact         contact
-                                      :prices          prices
-                                      :network         network
-                                      :token           token
-                                      :native-currency native-currency
-                                      :fiat-currency   fiat-currency
-                                      :all-tokens      all-tokens
-                                      :chain           chain}])))
+      [overview/render-transaction-overview {:transaction transaction
+                                             :flow               flow
+                                             :contact            contact
+                                             :prices             prices
+                                             :network            network
+                                             :token              token
+                                             :native-currency    native-currency
+                                             :fiat-currency      fiat-currency
+                                             :all-tokens         all-tokens
+                                             :chain              chain}])))
 
 ;; MAIN SEND TRANSACTION VIEW
 (defn- send-transaction-view [_opts]
   (reagent/create-class
-   {:reagent-render (fn [opts] [recipient/choose-recipient opts])}))
+   {:reagent-render (fn [opts] [recipient/render-choose-recipient opts])}))
 
 ;; SEND TRANSACTION FROM WALLET (CHAT)
 (defview send-transaction []
@@ -75,13 +75,13 @@
           native-currency (tokens/native-currency chain)
           token           (tokens/asset-for all-tokens
                                             (ethereum/network->chain-keyword network) (:symbol transaction))]
-      [overview/transaction-overview {:transaction     transaction
-                                      :flow            flow
-                                      :contact         contact
-                                      :prices          prices
-                                      :network         network
-                                      :token           token
-                                      :native-currency native-currency
-                                      :fiat-currency   fiat-currency
-                                      :all-tokens      all-tokens
-                                      :chain           chain}])))
+      [overview/render-transaction-overview {:transaction transaction
+                                             :flow               flow
+                                             :contact            contact
+                                             :prices             prices
+                                             :network            network
+                                             :token              token
+                                             :native-currency    native-currency
+                                             :fiat-currency      fiat-currency
+                                             :all-tokens         all-tokens
+                                             :chain              chain}])))

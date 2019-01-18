@@ -160,11 +160,11 @@
     (not (string/blank? input-str))
     (update-input-errors token fiat-currency prices)))
 
-(defn choose-amount-token-helper [{:keys [network
-                                          native-currency
-                                          all-tokens
-                                          contact
-                                          transaction]}]
+(defn render-choose-amount [{:keys [network
+                                    native-currency
+                                    all-tokens
+                                    contact
+                                    transaction]}]
   {:pre [(map? native-currency)]}
   (let [tx-atom                (reagent/atom transaction)
         coin                   (or (fetch-token all-tokens network (:symbol transaction))

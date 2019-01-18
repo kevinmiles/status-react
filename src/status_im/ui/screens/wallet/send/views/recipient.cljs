@@ -201,7 +201,7 @@
                       :key-fn    :address
                       :render-fn (partial render-contact on-contact)}]]))
 
-(defn choose-recipient [{:keys [modal? contacts transaction network network-status]}]
+(defn render-choose-recipient [{:keys [modal? contacts transaction network network-status]}]
   (let [transaction     (reagent/atom transaction)
         chain           (ethereum/network->chain-keyword network)
         native-currency (tokens/native-currency chain)
