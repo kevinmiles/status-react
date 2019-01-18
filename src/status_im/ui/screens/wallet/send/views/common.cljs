@@ -94,7 +94,7 @@
         modal-screen-bg-color
         (animation/interpolate bottom-position
                                {:inputRange [(- window-height) 0]
-                                :outputRange [colors/black
+                                :outputRange [colors/transparent
                                               (colors/alpha colors/black 0.7)]})
         modal-screen-top
         (animation/interpolate bottom-position
