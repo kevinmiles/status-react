@@ -21,12 +21,6 @@
             [status-im.ui.components.status-bar.view :as status-bar]
             [status-im.ui.components.styles :as components.styles]))
 
-; ----------------------------------------------------------------------
-;; Step 2 choosing an amount and token to send
-;; ----------------------------------------------------------------------
-
-;; Choosing the asset
-
 (defn white-toolbar [modal? title]
   (let [action (if modal? actions/close actions/back)]
     [toolbar/toolbar {:style {:background-color    colors/white
@@ -241,16 +235,18 @@
                   :max-length             20
                   :default-value          input-amount
                   :selection-color        colors/green
-                  :style                  {:color              colors/white
-                                           :font-size          30
-                                           :font-weight        :bold
-                                           :padding-horizontal 10
-                                           :max-width          290}}]
-                [react/text {:style {:color       (if (not (string/blank? input-amount))
-                                                    colors/white
-                                                    colors/blue-shadow)
-                                     :font-size   30
-                                     :font-weight :bold}}
+                  :style                  {:color               colors/white
+                                           :font-size           30
+                                           :font-weight         :bold
+                                           :padding-horizontal  10
+                                           :max-width           290
+                                           :text-align-vertical :center}}]
+                [react/text {:style {:color               (if (not (string/blank? input-amount))
+                                                            colors/white
+                                                            colors/blue-shadow)
+                                     :font-size           30
+                                     :font-weight         :bold
+                                     :text-align-vertical :center}}
                  input-symbol]]
                [react/view {}
                 [react/text {:style {:text-align  :center
@@ -292,7 +288,8 @@
                                        :line-height  22
                                        :padding-left 11}}
                    (wallet.utils/display-symbol coin)]]]
-                (let [disabled? (string/blank? input-amount)]
+                (let [disabled? (or (string/blank? input-amount)
+                                    (not (empty? (:error-message @state-atom))))]
                   [common/action-button {:disabled?        disabled?
                                          :underlay-color   colors/black-transparent
                                          :background-color (if disabled? colors/blue colors/white)
