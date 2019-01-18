@@ -271,8 +271,7 @@
                  [react/text {:style {:color       colors/white
                                       :font-size   15
                                       :line-height 22}}
-                  (i18n/label :t/network-fee-amount {:amount   (when (common/optimal-gas-present? @tx-atom)
-                                                                 (or (gas-gas-price->fiat (common/current-gas @tx-atom)) "0"))
+                  (i18n/label :t/network-fee-amount {:amount   (str (or (gas-gas-price->fiat (common/current-gas @tx-atom)) "0"))
                                                      :currency (:code fiat-currency)})]]]
                [react/view {:flex 1}]
 

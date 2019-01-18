@@ -408,10 +408,12 @@
             money/bignumber
             (.div (money/bignumber price)))))
 
-(defn max-fee [{:keys [gas gas-price]}]
-  (if (and gas gas-price)
-    (money/wei->ether (.times gas gas-price))
-    0))
+(defn max-fee [{:keys [gas gas-price optimal-gas optimal-gas-price] :as params}]
+  (let [gas-param       (or gas optimal-gas)
+        gas-price-param (or gas-price optimal-gas-price)]
+    (if (and gas-param gas-price-param)
+      (money/wei->ether (.times gas-param gas-price-param))
+      0)))
 
 (defn network-fees [prices token fiat-currency gas-ether-price]
   (some-> (token->fiat-conversion prices token fiat-currency gas-ether-price)
